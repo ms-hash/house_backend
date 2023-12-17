@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  prefecture: MyString
+  city: MyString
+  suite: MyString
+  architecture: one
+
+two:
+  prefecture: MyString
+  city: MyString
+  suite: MyString
+  architecture: two
