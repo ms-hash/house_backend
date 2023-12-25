@@ -2,6 +2,9 @@ class Api::V1::AddressesController < ApplicationController
   before_action :set_address, except: [:index, :create]
   def index
     addresses = Address.eager_load(:architecture)
+    count = Address.count.to_s
+    response.set_header('Access-Control-Expose-Headers', "X-Total-Count")
+    response.set_header('X-Total-Count', count)
     render json: {
       data: ActiveModelSerializers::SerializableResource.new(addresses, each_serializer: AddressSerializer),
       message: ['住所一覧取得: 成功'],

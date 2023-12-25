@@ -2,6 +2,9 @@ class Api::V1::CategoriesController < ApplicationController
   before_action :set_category, except:[:index, :create]
   def index
     categories = Category.preload(:architectures)
+    count = Category.count.to_s
+    response.set_header('Access-Control-Expose-Headers', "X-Total-Count")
+    response.set_header('X-Total-Count', count)
     render json: categories, each_serializer: CategorySerializer
   end
 

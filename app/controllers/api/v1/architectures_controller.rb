@@ -2,6 +2,9 @@ class Api::V1::ArchitecturesController < ApplicationController
   before_action :set_architecture, except: [:index, :create]
   def index
     architectures = Architecture.eager_load(:address, :category)
+    count = Architecture.count.to_s
+    response.set_header('Access-Control-Expose-Headers', "X-Total-Count")
+    response.set_header('X-Total-Count', count)
     render json: architectures, each_serializer: ArchitectureSerializer
   end
 
